@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col d-flex justify-content-center">
+    <div>
+      <h1>Editing entry</h1>
+
+      <%= render "form", entry: @entry %>
+
+      <br>
+
+      <div>
+        <%= link_to "Show this entry", @entry, class: "btn btn-primary" %>
+        <%= link_to "Back to entries", entries_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

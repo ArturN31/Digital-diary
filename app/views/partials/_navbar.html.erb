@@ -1,0 +1,25 @@
+<div class="row navbar-row">
+    <div class="col px-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <%= link_to "Home", "/", :class => current_class?("/") %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Entries", "/entries", :class => current_class?("/entries") %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "TDEE", "/tdee", :class => current_class?("/tdee") %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

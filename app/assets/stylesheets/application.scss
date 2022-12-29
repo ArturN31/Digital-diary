@@ -1,0 +1,76 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+$bg-colour: rgb(43, 51, 51);
+
+
+/* HEADER */
+.header-row {
+    background-color: $bg-colour;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+
+    color: white;
+
+    text-decoration: none;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
+
+.header:hover {
+    color: #c2c2c2;
+}
+
+#header-big {
+    font-size: 80px;
+}
+
+#header-small {
+    font-size: 22px;
+    text-align: end;
+
+    margin-top: -18px;
+    margin-right: 44px;
+}
+/* EOF HEADER */
+
+/* NAVBAR */
+.navbar-row {
+    border-top: 1px solid black;
+
+    background-color: $bg-colour;
+}
+
+.active-link {
+    color: black !important;
+}
+/* EOF NAVBAR */
+
+/* NOTICE */
+.notice {
+    background-color: orange;
+    font-size: 22px;
+    padding: 5px;
+
+    border: 1px solid black;
+    border-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+
+/* EOF NOTICE */
