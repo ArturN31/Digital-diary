@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  get 'tdee/index'
-  get 'home/index'
+  get 'sessions/new'
+  get '/session', to: 'sessions#destroy'
+  
+  resources :users, only: %i[new create]
   resources :entries
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resource :session, only: %i[new create destroy]
 
   get 'entries', to: 'entries#index' #route /entries
   get 'tdee', to: 'tdee#index' #route /tdee
-  root to: "home#index"
-  
+  get 'home', to: 'home#index' #route /home
+
+  root to: 'home#index'
 end

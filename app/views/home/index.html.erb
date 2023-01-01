@@ -1,2 +1,16 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="row d-flex justify-content-center text-center">
+  <div class="col-12">
+    <%# if notice is not nil display notice %>
+    <% if notice.nil? %>
+    <% else %>
+      <div class='notice'><%= notice %></div>
+    <% end %>
+
+    <h1 class="my-4">Home#index</h1>
+    
+    <% if logged_in? %>
+      <p><%= "Hello #{current_user.name}!" %></p>
+    <% end %>
+  </div>
+</div>
+

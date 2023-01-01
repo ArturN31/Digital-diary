@@ -1,10 +1,19 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: %i[ show edit update destroy ]
   require 'rest-client'
+  before_action :authenticate 
+  before_action :set_entry, only: %i[ show edit update destroy ]
+  
+  #User authentication - only logged in user can access the entries view
+  def authenticate
+    redirect_to(new_session_path) unless logged_in?
+  end
 
-  # GET /entries or /entries.json
+  # GET user specific /entries or /entries.json
   def index
-    @entries = Entry.all.reverse.each.group_by(&:day)
+    # @entries = Entry.all.reverse.each.group_by(&:day)
+
+    #Used to get user specific entries and group them by day then entries are reversed - newest first
+    @entries = Entry.where(user_id: current_user.id).reverse.each.group_by(&:day)
   end
 
   # GET /entries/1 or /entries/1.json
@@ -115,7 +124,7 @@ class EntriesController < ApplicationController
   #Insert calculated data into db as an entry
   def insert_upc(mealType, resGenericName, caloriesTotal, proteinsTotal, carbsTotal, fatsTotal, fibreTotal, upc, inputQuantity)
     #Inserting new entry to db
-    @entry = Entry.new(:food_meal_type => mealType, :food_name => resGenericName, :food_calories => caloriesTotal, :food_protein => proteinsTotal, :food_carbohydrates => carbsTotal, :food_fats => fatsTotal, :food_fibre => fibreTotal, :food_upc_code => upc, :food_quantity => inputQuantity)
+    @entry = current_user.entries.new(:food_meal_type => mealType, :food_name => resGenericName, :food_calories => caloriesTotal, :food_protein => proteinsTotal, :food_carbohydrates => carbsTotal, :food_fats => fatsTotal, :food_fibre => fibreTotal, :food_upc_code => upc, :food_quantity => inputQuantity)
 
     respond_to do |format|
       if @entry.save
@@ -218,7 +227,7 @@ class EntriesController < ApplicationController
   #Insert calculated data into db as an entry
   def insert_ingredient(mealType, productName, caloriesTotal, proteinsTotal, carbsTotal, fatsTotal, fibreTotal, upc, inputQuantity)
     #Inserting new entry to db
-    @entry = Entry.new(:food_meal_type => mealType, :food_name => productName, :food_calories => caloriesTotal, :food_protein => proteinsTotal, :food_carbohydrates => carbsTotal, :food_fats => fatsTotal, :food_fibre => fibreTotal, :food_upc_code => upc, :food_quantity => inputQuantity)
+    @entry = current_user.entries.new(:food_meal_type => mealType, :food_name => productName, :food_calories => caloriesTotal, :food_protein => proteinsTotal, :food_carbohydrates => carbsTotal, :food_fats => fatsTotal, :food_fibre => fibreTotal, :food_upc_code => upc, :food_quantity => inputQuantity)
 
     respond_to do |format|
       if @entry.save

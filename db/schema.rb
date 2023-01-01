@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_14_183830) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_30_233722) do
   create_table "entries", force: :cascade do |t|
     t.string "food_name"
     t.integer "food_upc_code"
-    t.integer "food_quantity"
+    t.string "food_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "food_meal_type"
@@ -23,6 +23,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_183830) do
     t.integer "food_carbohydrates"
     t.integer "food_fats"
     t.integer "food_fibre"
+    t.integer "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

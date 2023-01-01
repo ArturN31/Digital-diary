@@ -8,15 +8,31 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <%= link_to "Home", "/", :class => current_class?("/") %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "Entries", "/entries", :class => current_class?("/entries") %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to "TDEE", "/tdee", :class => current_class?("/tdee") %>
-                        </li>
+                        <% if logged_in? %>
+                            
+                            <li class="nav-item">
+                                <%= link_to "Home", "/", :class => current_class?("/") %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Entries", "/entries", :class => current_class?("/entries") %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "TDEE", "/tdee", :class => current_class?("/tdee") %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to 'Logout', session_path, method: :delete, :class => current_class?("session_path") %>
+                            </li>
+                        <% else %>
+                            <li class="nav-item">
+                                <%= link_to "Home", "/", :class => current_class?("/") %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Sign Up", new_user_path, :class => current_class?(new_user_path) %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to 'Log In', new_session_path, :class => current_class?(new_session_path) %>
+                            </li>
+                        <% end %>
                     </ul>
                 </div>
             </div>
