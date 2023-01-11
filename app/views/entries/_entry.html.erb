@@ -6,23 +6,29 @@
         <li class="list-group-item">
             <%= entry.food_name %>
         </li>
+
         <li class="list-group-item">
-            Quantity: <%= entry.food_quantity %> g/ml
+            Quantity: <%= (entry.food_quantity % 1 == 0) ? entry.food_quantity.to_i : entry.food_quantity %> g/ml
         </li>
+
         <li class="list-group-item">
-            Calories: <%= entry.food_calories %> kcal
+            Calories: <%= (entry.food_calories % 1 == 0) ? entry.food_calories.to_i : entry.food_calories %> kcal
         </li>
+
         <li class="list-group-item">
-            Protein: <%= entry.food_protein %> g
+            Protein: <%= (entry.food_protein % 1 == 0) ? entry.food_protein.to_i : entry.food_protein %> g
         </li>
+
         <li class="list-group-item">
-            Carbohydrates: <%= entry.food_carbohydrates %> g
+            Carbohydrates: <%= (entry.food_carbohydrates % 1 == 0) ? entry.food_fats.to_i : entry.food_carbohydrates %> g
         </li>
+
         <li class="list-group-item">
-            Fibre: <%= entry.food_fibre %> g
+            Fibre: <%= (entry.food_fibre % 1 == 0) ? entry.food_fibre.to_i : entry.food_fibre %> g
         </li>
+
         <li class="list-group-item">
-            Fats: <%= entry.food_fats %> g
+            Fats: <%= (entry.food_fats % 1 == 0) ? entry.food_fats.to_i : entry.food_fats %> g
         </li>
     </ul>
 </div>

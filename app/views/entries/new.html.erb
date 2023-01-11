@@ -2,8 +2,12 @@
   <div class="col d-flex justify-content-center">
     <div>
       <h1>New entry</h1>
-      <%= render "form", entry: @entry %>
-      <%= link_to "Back to entries", entries_path, class: "btn btn-primary" %>
+      
+      <%= render "form", entry: @entry, readonly: false %>
+      
+      <div class="form-group mb-3 d-flex justify-content-center">
+        <%= link_to "Back to entries", entries_path, class: "btn btn-primary d-flex justify-content-center" %>
+      </div>
     </div>
   </div>
 </div>

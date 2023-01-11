@@ -14,24 +14,30 @@
     <div class="text-center d-flex justify-content-center">
       <div>
         <h3 class="my-4">Entries for <%= day %> </h3>
+
         <h6>Todays intake:</h6>
         <ul class="list-group list-group-horizontal-sm mb-3">
           <li class="list-group-item">
               Calories: <%= entries.pluck(:food_calories).sum %>kcal
           </li>
+
           <li class="list-group-item">
               Protein: <%= entries.pluck(:food_protein).sum %>g
           </li>
+
           <li class="list-group-item">
               Carbohydrates: <%= entries.pluck(:food_carbohydrates).sum %>g
           </li>
+
           <li class="list-group-item">
               Fibre: <%= entries.pluck(:food_fibre).sum %>g
           </li>
+
           <li class="list-group-item">
               Fats: <%= entries.pluck(:food_fats).sum %>g
           </li>
         </ul>
+
       </div>
     </div>
 
@@ -39,10 +45,14 @@
       <div id="entries" class="col d-flex justify-content-center">
         <div>
           <%= render entry %>
-          <%= link_to "Show this entry", entry, class: "btn btn-primary mb-3" %>
+          <div class="form-group mb-3">
+            <%= link_to "Show this entry", entry, class: "btn btn-primary mb-3" %>
+          </div>
+          
         </div>
       </div>
     <% end %>
+    
   <% end %>
 </div>
 

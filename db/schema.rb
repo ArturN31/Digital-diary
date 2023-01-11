@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_30_233722) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_10_121315) do
   create_table "entries", force: :cascade do |t|
     t.string "food_name"
     t.integer "food_upc_code"
@@ -18,11 +18,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_233722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "food_meal_type"
-    t.integer "food_calories"
-    t.integer "food_protein"
-    t.integer "food_carbohydrates"
-    t.integer "food_fats"
-    t.integer "food_fibre"
+    t.float "food_calories"
+    t.float "food_protein"
+    t.float "food_carbohydrates"
+    t.float "food_fats"
+    t.float "food_fibre"
     t.integer "user_id"
   end
 

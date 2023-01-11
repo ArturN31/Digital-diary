@@ -1,19 +1,26 @@
 <div class="row d-flex justify-content-center text-center">
-  <div class="col-12">
+    <div class="col-12">
+        <%# if notice is not nil display notice %>
+        <% if notice.nil? %>
+        <% else %>
+        <div class='notice'><%= notice %></div>
+        <% end %>
+    </div>
+    <div class="col-12">
         <h1 class="my-4">Log In</h1>
-        <%= form_with url: session_path do |f| %>
+        <%= form_with url: session_path do |form| %>
             <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email %>
+                <%= form.label :email %><br />
+                <%= form.email_field :email %>
             </div>
 
             <div class="field">
-                <%= f.label :password %><br />
-                <%= f.password_field :password %>
+                <%= form.label :password %><br />
+                <%= form.password_field :password %>
             </div>
 
             <div class="actions">
-                <%= f.submit 'Log In' %>
+                <%= form.submit 'Log In' %>
             </div>
         <% end %>
     </div>

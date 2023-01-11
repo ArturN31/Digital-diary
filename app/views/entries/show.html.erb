@@ -6,13 +6,13 @@
       <div class='notice'><%= notice %></div>
     <% end %>
   </div>
-  <div class="col-6">
+  <div style="width: fit-content">
     <%= render @entry %>
 
-    <div class="d-flex justify-content-center">
-      <%= link_to "Edit this entry", edit_entry_path(@entry), class: "btn btn-primary mx-1" %>
-      <%= link_to "Back to entries", entries_path, class: "btn btn-primary mx-1" %>
-      <%= button_to "Destroy this entry", @entry, method: :delete, class: "btn btn-danger mx-1" %>
+    <div>
+      <%= link_to "Edit this entry", edit_entry_path(@entry), class: "btn btn-primary mx-1 d-flex justify-content-center m-1" %>
+      <%= link_to "Back to entries", entries_path, class: "btn btn-primary mx-1 d-flex justify-content-center m-1" %>
+      <%= button_to "Destroy this entry", @entry, method: :delete, data: {confirm: "Are you sure?"} , class: "btn btn-danger mx-1 d-flex justify-content-center m-1 mx-auto" %>
     </div>
   </div>
 </div>

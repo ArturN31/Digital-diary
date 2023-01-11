@@ -3,13 +3,13 @@
     <div>
       <h1>Editing entry</h1>
 
-      <%= render "form", entry: @entry %>
+      <%= render "form", entry: @entry, readonly: true %>
 
       <br>
 
       <div>
-        <%= link_to "Show this entry", @entry, class: "btn btn-primary" %>
-        <%= link_to "Back to entries", entries_path, class: "btn btn-primary" %>
+        <%= link_to "Show this entry", @entry, class: "btn btn-primary mx-1 d-flex justify-content-center m-1 mx-auto" %>
+        <%= link_to "Back to entries", entries_path, class: "btn btn-primary mx-1 d-flex justify-content-center m-1 mx-auto" %>
       </div>
     </div>
   </div>

@@ -1,0 +1,6 @@
+<%- headers = ['Foods', 'Date'] -%>
+<%= CSV.generate_line headers %>
+
+<%- @entries.each do |entry| -%>
+  <%= CSV.generate_line([entry.data['food_name'], entry.created_at]) -%>
+<%- end -%>

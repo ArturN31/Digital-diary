@@ -8,8 +8,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
+
+                        <%#Logged in user nav %>
                         <% if logged_in? %>
-                            
                             <li class="nav-item">
                                 <%= link_to "Home", "/", :class => current_class?("/") %>
                             </li>
@@ -20,17 +21,22 @@
                                 <%= link_to "TDEE", "/tdee", :class => current_class?("/tdee") %>
                             </li>
                             <li class="nav-item">
-                                <%= link_to 'Logout', session_path, method: :delete, :class => current_class?("session_path") %>
+                                <%= link_to 'Logout', "/session", method: :delete, :class => current_class?("/session") %>
                             </li>
+                            <li class="nav-item">
+                                <%= link_to "Export", entries_path(format: 'csv'), :class => current_class?("export") %>
+                            </li>
+
+                        <%#Not logged in user nav %>
                         <% else %>
                             <li class="nav-item">
                                 <%= link_to "Home", "/", :class => current_class?("/") %>
                             </li>
                             <li class="nav-item">
-                                <%= link_to "Sign Up", new_user_path, :class => current_class?(new_user_path) %>
+                                <%= link_to "Sign Up", "/signup", :class => current_class?("/signup") %>
                             </li>
                             <li class="nav-item">
-                                <%= link_to 'Log In', new_session_path, :class => current_class?(new_session_path) %>
+                                <%= link_to 'Log In', "/login", :class => current_class?("/login") %>
                             </li>
                         <% end %>
                     </ul>
