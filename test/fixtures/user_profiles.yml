@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_weight: 1
+  user_height: 1
+  user_age: 1
+  user_gender: MyString
+  user_pal_value: 1
+  user: one
+
+two:
+  user_weight: 1
+  user_height: 1
+  user_age: 1
+  user_gender: MyString
+  user_pal_value: 1
+  user: two

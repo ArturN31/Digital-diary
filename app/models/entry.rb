@@ -4,7 +4,7 @@ class Entry < ApplicationRecord
 
     #Gets the created_at value and formats it into: Month Day, Year
     def day
-        self.created_at.strftime("%b %e, %Y")
+        self.updated_at.strftime("%b %e, %Y")
     end
 
     #Entries to csv file

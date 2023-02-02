@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    #delays page load on mobiles and tablets - allows animatino to complete and loads the page
+    if device == "tablet" || device == "mobile"
+      sleep 0.385 
+    end
   end
 
   def create

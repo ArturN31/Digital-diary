@@ -1,59 +1,81 @@
 <div class="row d-flex justify-content-center text-center">
   <div class="col-12">
-    <%# if notice is not nil display notice %>
-    <% if notice.nil? %>
+    <% if device == "mobile" || device == "tablet" %>
+      <%= link_to "New entry", new_entry_path, class: "btn-spread custom-shadow float-end" %>
     <% else %>
-      <div class='notice'><%= notice %></div>
+      <%= link_to "New entry", new_entry_path, class: "m-1 my-3 btn-spread custom-shadow" %>
     <% end %>
-    
-    <h1 class="my-4">Entries</h1>
-    <%= link_to "New entry", new_entry_path, class: "btn btn-primary mb-3" %>
   </div>
-
+  <h2 class="text-white my-4">Current Week's entries</h2>
+  
   <% @entries.each do |day, entries| %>
-    <div class="text-center d-flex justify-content-center">
-      <div>
-        <h3 class="my-4">Entries for <%= day %> </h3>
+    <div class="accordion mx-3 my-3" id="accordion-<%= entries.pluck(:id).sum %>">
+      <div class="accordion-item rounded-4 custom-shadow">
+        <h2 class="accordion-header" id="heading-<%= entries.pluck(:id).sum %>">
+          <button 
+            class="accordion-button d-block rounded-4 text-center" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapse-<%= entries.pluck(:id).sum %>" 
+            aria-expanded="true" 
+            aria-controls="collapse--<%= entries.pluck(:id).sum %>">
+            <h5>Entries for <%= day %></h5>
+          </button>
+        </h2>
+        <div 
+          id="collapse-<%= entries.pluck(:id).sum %>" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="heading-<%= entries.pluck(:id).sum %>" 
+          data-bs-parent="#accordion-<%= entries.pluck(:id).sum %>">
+          <div class="accordion-body">
+            <div>
+              <h6 class="text-white">Todays intake:</h6>
+              <ul class="list-group list-group-horizontal-sm mb-3 d-flex justify-content-center">
+                <li class="list-group-item">
+                    Calories: <%= entries.pluck(:food_calories).sum.round(2) %>kcal
+                </li>
 
-        <h6>Todays intake:</h6>
-        <ul class="list-group list-group-horizontal-sm mb-3">
-          <li class="list-group-item">
-              Calories: <%= entries.pluck(:food_calories).sum %>kcal
-          </li>
+                <li class="list-group-item">
+                    Protein: <%= entries.pluck(:food_protein).sum.round(2) %>g
+                </li>
 
-          <li class="list-group-item">
-              Protein: <%= entries.pluck(:food_protein).sum %>g
-          </li>
+                <li class="list-group-item">
+                    Carbohydrates: <%= entries.pluck(:food_carbohydrates).sum.round(2) %>g
+                </li>
 
-          <li class="list-group-item">
-              Carbohydrates: <%= entries.pluck(:food_carbohydrates).sum %>g
-          </li>
+                <li class="list-group-item">
+                    Fibre: <%= entries.pluck(:food_fibre).sum.round(2) %>g
+                </li>
 
-          <li class="list-group-item">
-              Fibre: <%= entries.pluck(:food_fibre).sum %>g
-          </li>
+                <li class="list-group-item">
+                    Fats: <%= entries.pluck(:food_fats).sum.round(2) %>g
+                </li>
+              </ul>
+            </div>
 
-          <li class="list-group-item">
-              Fats: <%= entries.pluck(:food_fats).sum %>g
-          </li>
-        </ul>
-
-      </div>
-    </div>
-
-    <% entries.each do |entry| %>
-      <div id="entries" class="col d-flex justify-content-center">
-        <div>
-          <%= render entry %>
-          <div class="form-group mb-3">
-            <%= link_to "Show this entry", entry, class: "btn btn-primary mb-3" %>
+            <div class="row align-items-top">
+              <% entries.each do |entry| %>
+                <div id="entry" class="col-12 col-md-6 col-lg-4 col-xl-3">
+                  <hr class="border border-warning border-2 opacity-50 mt-5">
+                  <%= render entry %>
+                  <div class="form-group my-3">
+                    <%= link_to "Show this entry", entry, class: "btn-spread mt-3" %>
+                  </div>
+                </div>  
+              <% end %>
+            </div>
+            <div>
+              <a id="top-of-accordion" href="#accordion-<%= entries.pluck(:id).sum %>" class="d-flex justify-content-center mx-auto">
+                <div class='row d-flex align-items-center btn-accordion-top'>
+                  <i class='bi bi-arrow-up'></i>
+                </div>
+              </a>
+            </div>
           </div>
-          
         </div>
       </div>
-    <% end %>
-    
-  <% end %>
+    </div>
+  <% end %> <%# @entries.each %>
 </div>
 
 

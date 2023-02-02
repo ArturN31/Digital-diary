@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_10_121315) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_231536) do
   create_table "entries", force: :cascade do |t|
     t.string "food_name"
     t.integer "food_upc_code"
@@ -26,6 +26,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_121315) do
     t.integer "user_id"
   end
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.integer "user_weight"
+    t.integer "user_height"
+    t.integer "user_age"
+    t.string "user_gender"
+    t.string "user_pal_value"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_min_calories"
+    t.integer "user_max_calories"
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -35,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_121315) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "user_profiles", "users"
 end

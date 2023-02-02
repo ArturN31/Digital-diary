@@ -1,0 +1,9 @@
+<div class="row d-flex justify-content-center">
+  <h1 class="text-white my-4 text-center">New user profile</h1>
+  <div class="card card-form col-12 col-md-6 col-lg-5 custom-shadow bg-dark">
+    <%= render "form", user_profile: @user_profile %>
+  </div>
+  <div class="form-group mt-4 d-flex justify-content-center">
+    <%= link_to "Back to user profiles", user_profiles_path, class: "btn-spread" %>
+  </div>
+</div>

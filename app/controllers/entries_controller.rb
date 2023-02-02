@@ -16,9 +16,15 @@ class EntriesController < ApplicationController
 
   # GET user specific /entries or /entries.json
   def index
-    #Used to get user specific entries and group them by day then entries are reversed - newest first
-    @entries = Entry.where(user_id: current_user.id).reverse.each.group_by(&:day)
+    #delays page load on mobiles and tablets - allows animatino to complete and loads the page
+    if device == "tablet" || device == "mobile"
+      sleep 0.385 
+    end
+    
+    #Used to get user specific entries for current week group them by day then reverse to display newest first
+    @entries = Entry.where(user_id: current_user.id).where("updated_at >= ?", Date.today.at_beginning_of_week).reverse.each.group_by(&:day)
 
+    #Entries export
     respond_to do |format|
       format.html
       format.csv { send_data Entry.where(user_id: current_user.id).to_csv, filename: "Entries - #{DateTime.now.strftime("%d-%m-%Y, %H:%M")}.csv"}
@@ -27,21 +33,37 @@ class EntriesController < ApplicationController
 
   # GET /entries/1 or /entries/1.json
   def show
+    #delays page load on mobiles and tablets - allows animatino to complete and loads the page
+    if device == "tablet" || device == "mobile"
+      sleep 0.385 
+    end
+
     #Blocks access to entry if user does not own it
     restrict_access if @entry.user_id != @current_user.id
   end
 
   # GET /entries/new
   def new
+    #delays page load on mobiles and tablets - allows animatino to complete and loads the page
+    if device == "tablet" || device == "mobile"
+      sleep 0.385 
+    end
+
     @scannerHidden = false
     @entry = Entry.new
   end
 
   # GET /entries/1/edit
   def edit
-    @scannerHidden = true
+    #delays page load - lets new entry animation complete and loads the page
+    if device == "tablet" || device == "mobile"
+      sleep 0.385 
+    end
+
     #Blocks access to entry if user does not own it
     restrict_access if @entry.user_id != @current_user.id
+
+    @scannerHidden = true
   end
 
   # POST /entries or /entries.json

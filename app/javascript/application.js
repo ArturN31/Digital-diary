@@ -4,7 +4,8 @@ import "jquery"
 import "jquery_ujs"
 import "jquery-ui-rails"
 
-import "@hotwired/turbo-rails"
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
 import "controllers"
 
 //= require jquery3
@@ -12,8 +13,25 @@ import "controllers"
 //= require jquery-ui-rails
 //= require_tree .
 
+var clicked = true
 $(document).ready(function(){
-    $("#barcode-scanner").on("click tap", load_quagga);
+    //used to hide/show the barcode scanner on button click
+    $("#camera").on("click tap", function() {
+        if(clicked == true) {
+            $("#barcode-scanner").show(); //showing the barcode scanner div
+            
+            load_quagga();
+
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#barcode-scanner").offset().top
+            }, 500);
+            
+        } else {
+            $("#barcode-scanner").hide(); //hiding the barcode scanner div
+            Quagga.stop();
+            clicked = true
+        }
+    });
 });
 
 //Displays confirm dialog that manages UPC verification
@@ -33,8 +51,8 @@ function ConfirmDialog(message, code) {
         buttons: {
             //Setting up yes button
             "Yes": {
-                text: "Yes",
-                "class": "btn btn-primary px-3 py-2 m-1",
+                text: "Correct",
+                id: "btn-dialog",
                 //If yes button clicked
                 click: function() {
                     $("#barcode-scanner").hide(); //hiding the barcode scanner div
@@ -45,35 +63,32 @@ function ConfirmDialog(message, code) {
             },
             //Setting up no button
             "No": {
-                text: "No",
-                "class": "btn btn-primary px-3 py-2 m-1",
+                text: "Rescan",
+                id: "btn-dialog",
                 //If no button clicked
                 click: function() {
-                    load_quagga(); //loading barcode scanner
-
                     $(this).dialog("close"); //closing dialog
+                    load_quagga(); //loading barcode scanner
                 }
             }
-        }
+        },
+        position: { my: "center", at: "bottom" }
     });
-
-    $(".ui-dialog-titlebar-close").addClass("btn btn-primary px-3 py-2 m-1"); //adding bootstrap classes to the dialog close button
-    $(".ui-dialog-titlebar-close").css("font-size", "20")
 };
 
 function load_quagga(){
+    clicked = false
     //if barcode element is present && user has access to media devices && of type getUserMedia
     if ($('#barcode-scanner').length > 0 
     && navigator.mediaDevices 
     && typeof navigator.mediaDevices.getUserMedia === 'function') {
-
         $("#barcode-scanner video").show();
 
         var last_result = [];
         if (Quagga.initialized == undefined) {
             Quagga.onDetected(function(result) {
                 var last_code = result.codeResult.code; //scanned code
-                ConfirmDialog("<br><span style='color:red; font-size: larger;'>Code:<br>" + last_code + "</span><br><br> Are you sure that the scanned code is correct?<br><br>", last_code); //Passing message and last_code to the ConfirmDialog function
+                ConfirmDialog("<br><span style='font-size: larger;'>Code:<br>" + last_code + "</span><br><br>Please, verify the code.<br><br>", last_code); //Passing message and last_code to the ConfirmDialog function
                 Quagga.stop();
             });
         }

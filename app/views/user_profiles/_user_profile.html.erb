@@ -1,0 +1,35 @@
+<div id="<%= dom_id user_profile %>" class="card px-0 text-center custom-shadow">
+  <div class="card-header">
+    <strong><%= "Hello #{current_user.name}!" %></strong>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <strong>Weight:</strong>
+      <%= user_profile.user_weight %>kg
+    </li>
+    <li class="list-group-item">
+      <strong>Height:</strong>
+      <%= user_profile.user_height %>cm
+    </li>
+    <li class="list-group-item">
+      <strong>Age:</strong>
+      <%= user_profile.user_age %> years old
+    </li>
+    <li class="list-group-item">
+      <strong>Gender:</strong>
+      <%= user_profile.user_gender %>
+    </li>
+    <li class="list-group-item">
+      <strong>Physical activity value:</strong>
+      <%= user_profile.user_pal_value %>
+    </li>
+    <li class="list-group-item">
+      <strong>Min calories value:</strong>
+      <%= user_profile.user_min_calories %>
+    </li>
+    <li class="list-group-item">
+      <strong>Max calories value:</strong>
+      <%= user_profile.user_max_calories %>
+    </li>
+  </ul>
+</div>

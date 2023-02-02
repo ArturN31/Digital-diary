@@ -1,16 +1,89 @@
 <div class="row d-flex justify-content-center text-center">
-  <div class="col-12">
-    <%# if notice is not nil display notice %>
-    <% if notice.nil? %>
-    <% else %>
-      <div class='notice'><%= notice %></div>
-    <% end %>
-
-    <h1 class="my-4">Home#index</h1>
-    
-    <% if logged_in? %>
-      <p><%= "Hello #{current_user.name}!" %></p>
-    <% end %>
+  <%# IF NOT LOGGED IN %>
+  <% if !logged_in? %>
+    <div class="col-12">
+      <div class="py-5 text-break text-white">
+        <h2><%= "Make sure to sign up!" %></h2>
+        <h4><%= "To make use of the application." %></h4>
+      </div>
+    </div>
+  <% end %>
+  
+  <%# IF LOGGED IN BUT PROFILE DOES NOT EXIST %>
+  <% if logged_in? && !profile_exists? %>
+    <div class="col-12">
+      <div class="py-5 text-break text-white">
+        <h2><%= "Hello #{current_user.name}!" %></h2>
+      </div>
   </div>
-</div>
+  <% end %>
 
+  <%# IF LOGGED IN AND PROFILE DOES EXIST %>
+  <% if logged_in? && profile_exists? %>
+    <div class="col-12">
+      <div class="py-5 text-break text-white">
+        <h2><%= "Hello #{current_user.name}!" %></h2>
+        
+        <h4>You are <span><%= current_user.user_profiles[0].user_pal_value %></span></h4>
+
+        <h5>Recommended intake is <span><%= "#{current_user.user_profiles[0].user_min_calories} - #{current_user.user_profiles[0].user_max_calories}" %> calories</span></h5>
+      </div>
+    </div>
+    <h6 class="text-white">Current Week's summary</h6>
+    <% @entries.each do |day, entries| %>
+      <div class="accordion mx-3 my-3" id="accordion-<%= entries.pluck(:id).sum %>">
+        <div class="accordion-item rounded-4 custom-shadow">
+          <h2 class="accordion-header" id="heading-<%= entries.pluck(:id).sum %>">
+            <button 
+            class="accordion-button d-block rounded-4 text-center" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#collapse-<%= entries.pluck(:id).sum %>" 
+            aria-expanded="true" 
+            aria-controls="collapse--<%= entries.pluck(:id).sum %>">
+              <h5>Summary for <%= day %></h5>
+            </button>
+          </h2>
+          <div 
+          id="collapse-<%= entries.pluck(:id).sum %>" 
+          class="accordion-collapse collapse" 
+          aria-labelledby="heading-<%= entries.pluck(:id).sum %>" 
+          data-bs-parent="#accordion-<%= entries.pluck(:id).sum %>">
+            <div class="accordion-body">
+              <div>
+                <h6 class="text-white">Calories left:</h6>
+                <ul class="list-group list-group-horizontal-sm mb-5 d-flex justify-content-center">
+                  <li class="list-group-item">
+                      Min calories left: <%= current_user.user_profiles[0].user_min_calories - entries.pluck(:food_calories).sum.round(2) %>kcal
+                  </li>
+                  <li class="list-group-item">
+                      Max calories left: <%= current_user.user_profiles[0].user_max_calories - entries.pluck(:food_calories).sum.round(2) %>kcal
+                  </li>
+                </ul>
+
+                <h6 class="text-white">Consumed nutrients:</h6>
+                <ul class="list-group list-group-horizontal-sm mb-3 d-flex justify-content-center">
+                  <li class="list-group-item">
+                      Protein: <%= entries.pluck(:food_protein).sum.round(2) %>g
+                  </li>
+
+                  <li class="list-group-item">
+                      Carbohydrates: <%= entries.pluck(:food_carbohydrates).sum.round(2) %>g
+                  </li>
+
+                  <li class="list-group-item">
+                      Fibre: <%= entries.pluck(:food_fibre).sum.round(2) %>g
+                  </li>
+
+                  <li class="list-group-item">
+                      Fats: <%= entries.pluck(:food_fats).sum.round(2) %>g
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %> <%# @entries.each %>
+  <% end %>
+</div>
