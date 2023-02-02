@@ -1,0 +1,121 @@
+<div class="row navbar-shadow">
+    <div class="col px-0">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid d-flex justify-content-end">
+                <button class="navbar-toggler mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-list btn-icon" style="margin-left: -12px; margin-top: -4px; margin-bottom: -4px; border-radius: 3px 0px 0px 3px; padding: 5px"></i>
+                        <span id="menu" class="mx-2">Menu</span>
+                    </div>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+
+                        <%#Logged in user nav %>
+                        <% if logged_in? %>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                            <i class='bi bi-house'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Home
+                                        </div>
+                                    </div>
+                                "), "/", :class => current_class?("/") %>
+                            </li>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                            <i class='bi bi-journal-bookmark'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Entries
+                                        </div>
+                                    </div>
+                                "), "/entries", :class => current_class?("/entries") %>
+                            </li>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                            <i class='bi bi-person-gear'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Profile
+                                        </div>
+                                    </div>
+                                "), "/profile", :class => current_class?("/profile") %>
+                            </li>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                        <i class='bi bi-archive'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Archives
+                                        </div>
+                                    </div>
+                                "), "/archives", :class => current_class?("/archives") %>
+                            </li>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                        <i class='bi bi-box-arrow-left'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Logout
+                                        </div>
+                                    </div>
+                                "), "/session", method: :delete, :class => current_class?("/session") %>
+                            </li>
+
+                        <%#Not logged in user nav %>
+                        <% else %>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                            <i class='bi bi-house'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Home
+                                        </div>
+                                    </div>
+                                "), "/", :class => current_class?("/") %>
+                            </li>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                        <i class='bi bi-person-fill-add'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Sign up
+                                        </div>
+                                    </div>
+                                "), "/signup", :class => current_class?("/signup") %>
+                            </li>
+                            <li class="nav-item mx-2 d-flex justify-content-end">
+                                <%= link_to raw("
+                                    <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                                        <div class='col-4 btn-navbar-icon'>
+                                        <i class='bi bi-person-circle'></i>
+                                        </div>
+                                        <div class='col-8' style='padding: 14px 10px'>
+                                            Log in
+                                        </div>
+                                    </div>
+                                "), "/login", :class => current_class?("/login") %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

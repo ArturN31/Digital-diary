@@ -1,0 +1,62 @@
+<div class="row d-flex justify-content-center text-center">
+    <% if device == "tablet" || device == "mobile" %>
+        <li class="nav-item mx-2 d-flex justify-content-end">
+            <%= link_to raw("
+                <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                    <div class='col-4 btn-navbar-icon'>
+                        <i class='bi bi-download'></i>
+                    </div>
+                    <div class='col-8' style='padding: 14px 10px'>
+                        Export
+                    </div>
+                </div>
+            "), entries_path(format: 'csv'), :class => current_class?("export"), style: "margin-right: 8px; margin-bottom: 5px" %>
+        </li>
+    <% end %>
+
+    <% if device == "desktop" %>
+        <li class="nav-item mx-2 my-3 d-flex justify-content-center">
+            <%= link_to raw("
+                <div class='row d-flex align-items-center btn-navbar custom-shadow'>
+                    <div class='col-4 btn-navbar-icon'>
+                        <i class='bi bi-download'></i>
+                    </div>
+                    <div class='col-8' style='padding: 14px 10px'>
+                        Export
+                    </div>
+                </div>
+            "), entries_path(format: 'csv'), :class => current_class?("export"), style: "margin-right: 8px; margin-bottom: 5px" %>
+        </li>
+    <% end %>
+
+    <h2 class="my-4 mb-1 text-white"> Archives of all your entries </h2>
+    <div class="row align-items-top">
+        <% @entries.each do |entry, day| %>
+            <div class="d-flex justify-content-center">
+                <div id="entry" class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <hr class="border border-warning border-2 opacity-50 mt-5">
+                    <h3 class="my-4 text-white">
+                        <%= entry.created_at.strftime("%e %b, %Y")%>
+                        <br>
+                        <%= entry.created_at.strftime("%H:%M %p") %>
+                    </h3>
+                    <%= render entry %>
+                    <div class="form-group my-3">
+                        <%= link_to "Show this entry", entry, class: "btn-spread mt-3" %>
+                    </div>
+                </div>  
+            </div>
+        <% end %>
+    </div>
+
+    <a id="top-of-accordion" href="#header-big" class="d-flex justify-content-center mx-auto">
+        <div class='row d-flex align-items-center btn-accordion-top'>
+        <i class='bi bi-arrow-up'></i>
+        </div>
+    </a>
+    <div class="d-flex justify-content-center mx-auto">
+        <div class="col-xs-12 col-lg-8">
+            <%= paginate @entries, window: 1, outer_window: 2 %>
+        </div>
+    </div>
+</div>

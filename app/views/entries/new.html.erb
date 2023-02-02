@@ -1,0 +1,9 @@
+<div class="row d-flex justify-content-center">
+  <h1 class="my-4 text-white text-center">New entry</h1>
+  <div class="card form-card col-12 col-md-6 custom-shadow bg-dark">
+    <%= render "form", entry: @entry, readonly: false %>    
+  </div>
+  <div class="form-group mt-4 d-flex justify-content-center">
+    <%= link_to "Back to entries", entries_path, class: "btn-spread m-1" %>
+  </div>
+</div>
