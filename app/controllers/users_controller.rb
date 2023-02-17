@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: %i[ new update ]
-
     def new
         #delays page load on mobiles and tablets - allows animatino to complete and loads the page
         if device == "tablet" || device == "mobile"
