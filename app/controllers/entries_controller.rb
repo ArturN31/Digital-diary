@@ -170,16 +170,16 @@ class EntriesController < ApplicationController
     #get request sent to CalorieNinjas API
     response = RestClient.get(url, headers={
       'X-RapidAPI-Key': ENV["CALORIE_NINJA_API_KEY"], 
-      'X-RapidAPI-Host': 'calorieninjas.p.rapidapi.com'
+      'X-RapidAPI-Host': 'nutrition-by-api-ninjas.p.rapidapi.com'
     })
 
     #Verifys that response is present before proceding
-    if JSON.parse(response)['items'].present?
+    if JSON.parse(response).present?
       get_product_nutrients(response, action)
     end
 
     #If response is not present display notice
-    if !JSON.parse(response)['items'].present?
+    if !JSON.parse(response).present?
       respond_to do |format|
         format.html { redirect_to entries_url, notice: 'Could not retrieve data - check product name spelling.' }
         format.json { head :no_content }
@@ -190,13 +190,13 @@ class EntriesController < ApplicationController
   #Getting values from CalorieNinjas API response
   def get_product_nutrients(response, action)
     #getting values from JSON
-    resServingSize = JSON.parse(response)['items'][0]['serving_size_g']
+    resServingSize = JSON.parse(response)[0]['serving_size_g']
     resGenericName = entry_params['food_name']
-    resCalories = JSON.parse(response)['items'][0]['calories']
-    resProteins = JSON.parse(response)['items'][0]['protein_g']
-    resCarbohydrates = JSON.parse(response)['items'][0]['carbohydrates_total_g']
-    resFibre = JSON.parse(response)['items'][0]['fiber_g']
-    resFat = JSON.parse(response)['items'][0]['fat_total_g']
+    resCalories = JSON.parse(response)[0]['calories']
+    resProteins = JSON.parse(response)[0]['protein_g']
+    resCarbohydrates = JSON.parse(response)[0]['carbohydrates_total_g']
+    resFibre = JSON.parse(response)[0]['fiber_g']
+    resFat = JSON.parse(response)[0]['fat_total_g']
 
     calculate_nutrients(resServingSize, resGenericName, resCalories, resProteins, resCarbohydrates, resFibre, resFat, action)
   end
