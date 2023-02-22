@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_231536) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_22_124705) do
   create_table "entries", force: :cascade do |t|
     t.string "food_name"
-    t.integer "food_upc_code"
+    t.integer "food_upc_code", limit: 8
     t.string "food_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
